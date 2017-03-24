@@ -1,0 +1,99 @@
+﻿@model IEnumerable<CMS.Model.CompanyModel>
+
+@{
+	ViewBag.Title = "Company";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+	<div class="col-lg-12">
+		<h2>
+			Manage Company
+		</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-4">
+		<form class="form-inline" method="post">
+			<table>
+				<tr>
+					<td style="width:120px;">
+						<label for="filterName">@Html.DisplayNameFor(model => model.Name)</label></td>
+					<td>
+						<input id="filterName" name="filterName" type="text" class="form-control" value=@ViewBag.FilterName ></td>
+					<td>
+						<input id="btnSearch" type="submit" value="Search" class="btn btn-default" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="table-responsive">
+            <a href="#" id="lnkNew">New Company</a>
+			@*Html.ActionLink("Create New", "Create")*@
+			<table class="table table-bordered table-hover table-striped">
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.Name)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.ABN)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Description)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Website)
+					</th>
+					<th></th>
+				</tr>
+
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.Name)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.ABN)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Description)
+						</td>
+						<td>
+							<a href="@Html.DisplayFor(modelItem => item.Website)" target="_blank">@Html.DisplayFor(modelItem => item.Website)</a>
+						</td>
+						<td class="text-center">
+                            <a href="#" id="lnkEdit" onclick="Edit(@Html.DisplayFor(modelItem => item.CompanyID));">Edit</a>
+                            <a href="#" id="lnkDelete" onclick="Delete(@Html.DisplayFor(modelItem => item.CompanyID));">Delete</a>
+							@*Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+							@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+							@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+						</td>
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+<div id="dialog-form" title="Create Company">
+    <p class="validateTips">* are required.</p>
+    <form id="formData">
+        <fieldset>
+            <label for="formName">@Html.DisplayNameFor(model => model.Name)*</label>
+            <input type="text" name="formName" id="formName" value="" class="text ui-widget-content ui-corner-all form-control">
+            <label for="formABN">@Html.DisplayNameFor(model => model.ABN)*</label>
+            <input type="text" name="formABN" id="formABN" value="" class="text ui-widget-content ui-corner-all form-control">
+            <label for="formDescription">@Html.DisplayNameFor(model => model.Description)</label>
+            <input type="text" name="formDescription" id="formDescription" value="" class="text ui-widget-content ui-corner-all form-control">
+            <label for="formWebsite">@Html.DisplayNameFor(model => model.Website)*</label>
+            <input type="text" name="formWebsite" id="formWebsite" value="" class="text ui-widget-content ui-corner-all form-control">
+            <input type="hidden" id="hID" name="hID"/>
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input id="formSubmit" type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
+<script src="/Scripts/CMS/Settings/Company.js"></script>

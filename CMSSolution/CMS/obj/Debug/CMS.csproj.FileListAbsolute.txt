@@ -1,0 +1,5 @@
+C:\Projects\CMSSolution\CMS\bin\Debug\CMS.dll
+C:\Projects\CMSSolution\CMS\bin\Debug\CMS.pdb
+C:\Projects\CMSSolution\CMS\obj\Debug\CMS.dll
+C:\Projects\CMSSolution\CMS\obj\Debug\CMS.pdb
+C:\Projects\CMSSolution\CMS\obj\Debug\CMS.csprojResolveAssemblyReference.cache

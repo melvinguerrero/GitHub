@@ -1,0 +1,128 @@
+﻿@model CMS.Model.ContractModel
+@{
+    ViewBag.Title = "Contracts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h2>
+            Contracts
+        </h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+            <table>
+                <tr>
+                    <td style="width:120px;">
+                        <label for="Company">@Html.DisplayNameFor(m => m.Company)</label>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.Company, new SelectList(ViewBag.CompanyList, "CompanyID", "Name"), "All", new { @class = "form-control" })
+                    </td>
+                    <td style="width:120px;padding-left:10px;">
+                        <label for="ContractType">@Html.DisplayNameFor(m => m.ContractType)</label>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.ContractType, new SelectList(ViewBag.ContractTypeList, "ContractTypeID", "Name"), "All", new { @class = "form-control" })
+                    </td>
+                    <td style="width:120px;padding-left:10px;">
+                        <label for="selValidContract">Valid Contract</label>
+                    </td>
+                    <td>
+                        <select id="selValidContract" class="form-control">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                            <option value="">All</option>
+                        </select>
+                    </td>
+                    <td style="width:150px;padding-left:10px;">
+                        <label for="selNearRenewal">Near Renewal Date</label>
+                    </td>
+                    <td>
+                        <select id="selNearRenewal" class="form-control">
+                            <option value="">All</option>
+                            <option value="true" @ViewBag.IsNearRenewalText>Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="btnSearch" type="submit" value="Search" class="btn btn-default" />
+                    </td>
+                </tr>
+            </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="col-lg-12">
+                <tr>
+                    <td style="vertical-align:bottom;" class="col-lg-2"><a href="#" id="lnkNew">New Contract</a></td><td style="vertical-align:bottom;text-align:right;"><ul id="pagination-top" style="margin-top:0px;margin-bottom:0px;"></ul></td>
+                </tr>
+            </table>   
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Company)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.ContractType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.SignedDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.EndDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.RenewalDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Price)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.IsValid)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyContract">
+                </tbody>
+            </table>
+            <table class="col-lg-12">
+                <tr>
+                    <td class="col-lg-2"></td><td style="vertical-align:bottom;text-align:right;"><ul id="pagination-bot" style="margin-top:0px;margin-bottom:0px;"></ul></td>
+                </tr>
+            </table>   
+</div>
+    </div>
+</div>
+<div id="dialog-form" title="Create Contract">
+    <p class="validateTips">* are required.</p>
+    <form id="formData">
+        <fieldset>
+            <label for="formCompanyID">@Html.DisplayNameFor(m => m.Company)*</label>
+            @Html.DropDownListFor(m => m.Company, new SelectList(ViewBag.CompanyList, "CompanyID", "Name"), "-Select-", new { @class = "form-control", @id = "formCompany" })
+            <label for="formContractTypeID">@Html.DisplayNameFor(m => m.ContractType)*</label>
+            @Html.DropDownListFor(m => m.ContractType, new SelectList(ViewBag.ContractTypeList, "ContractTypeID", "Name"), "-Select-", new { @class = "form-control", @id = "formContractType" })
+            <label for="formSignedDate">@Html.DisplayNameFor(m => m.SignedDate)</label>
+            <input type="text" name="formSignedDate" id="formSignedDate" value="" class="text ui-widget-content ui-corner-all form-control">
+            <label for="formEndDate">@Html.DisplayNameFor(m => m.EndDate)</label>
+            <input type="text" name="formEndDate" id="formEndDate" value="" class="text ui-widget-content ui-corner-all form-control">
+            <label for="formRenewalDate">@Html.DisplayNameFor(m => m.RenewalDate)</label>
+            <input type="text" name="formRenewalDate" id="formRenewalDate" value="" class="text ui-widget-content ui-corner-all form-control">
+            <label for="formPrice">@Html.DisplayNameFor(m => m.Price)*</label>
+            <input type="text" name="formPrice" id="formPrice" value="" class="text ui-widget-content ui-corner-all form-control">
+            <input type="hidden" id="hID" name="hID" />
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input id="formSubmit" type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
+<div id="dialog-form-view" title="View Contract">
+    <div id="divViewContract">
+    </div>
+</div>
+<script src="/Scripts/CMS/Contracts.js"></script>
